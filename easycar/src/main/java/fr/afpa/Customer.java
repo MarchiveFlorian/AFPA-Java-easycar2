@@ -1,8 +1,11 @@
 package fr.afpa;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Customer {
+public class Customer implements Comparable<Customer>, Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     // Attributs
     private String firstName;
@@ -76,7 +79,6 @@ public class Customer {
         for (Reservation reservation : reservations) {
             total += reservation.totalPrice();
         }
-        System.out.println("Le client a dépensé : " + total);
         return total;
     }
 
@@ -105,5 +107,10 @@ public class Customer {
             System.out.println("La réservation : " + reservation + " n'a pas été trouvée pour le client : " + this.firstName + " " + this.lastName);
             return false;
         }
+    }
+
+    @Override
+    public int compareTo(Customer other) {
+       return Double.compare(this.totalMoneySpent(), other.totalMoneySpent());
     }
 }

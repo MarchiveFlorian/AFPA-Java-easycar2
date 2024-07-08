@@ -1,6 +1,8 @@
 package fr.afpa;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import fr.afpa.MotorizedVehicle.FuelType;
 
@@ -20,6 +22,7 @@ public class App
         //Instanciation de clients
         Customer a = new Customer("Alain", "Deloin", "rue du apeupres", "Strasbourg", "99999");
         Customer b = new Customer("Stephane", "Bern", "Le chateau", "Chateauroux", "01000");
+        Customer c = new Customer("John", "Doe", "x", "x", "00000");
 
         //Instanciation de réservations + lien entre un vehicle et sa réservation
         Reservation r1 = new Reservation(LocalDate.of(2024, 07, 01), LocalDate.of(2024, 07, 10), false, car);
@@ -30,9 +33,23 @@ public class App
         a.addReservation(r1);
         a.addReservation(r2);
         b.addReservation(r3);
+        c.addReservation(r2);
 
         //Test de la méthode totalMoneySpent
         a.totalMoneySpent();
         b.totalMoneySpent();
+        c.totalMoneySpent();
+
+
+        ArrayList<Customer> customers = new ArrayList<>();
+        customers.add(a);
+        customers.add(b);
+        customers.add(c);
+
+        Collections.sort(customers);
+
+        for (Customer customer : customers) {
+            System.out.println(customer + " - Total dépensé : \n" + customer.totalMoneySpent());
+        }
     }
 }
