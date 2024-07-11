@@ -9,8 +9,11 @@ public class CustomerManager {
     private static final String FILE_NAME = "customers.ser";
 
     public static void main(String[] args) {
+    }
+
+    public static void inputSerialize(ArrayList<Customer> customers) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Customer> customers = new ArrayList<>();
+    
 
         while (true) {
             System.out.println("Que voulez-vous faire ?");
@@ -21,9 +24,6 @@ public class CustomerManager {
 
             switch (choice) {
                 case 1:
-                    customers.add(new Customer("John", "Doe", "123 Main St", "Anytown", "12345"));
-                    customers.add(new Customer("Alain", "Deloin", "rue du apeupres", "Strasbourg", "99999"));
-                    customers.add(new Customer("Stephane", "Bern", "Le chateau", "Chateauroux", "01000"));
                     serializeCustomers(customers);
                     break;
                 case 2:
@@ -44,10 +44,13 @@ public class CustomerManager {
         }
     }
 
+
     public static void serializeCustomers(ArrayList<Customer> customers) {
-        try (FileOutputStream fileOut = new FileOutputStream(FILE_NAME); //ouvre un flux de sortie vers le fichier nommé 'FILE_NAME'
-                ObjectOutputStream out = new ObjectOutputStream(fileOut)) { //créer un flux de sortie d'objets qui permet de serialiser des objets java
-            out.writeObject(customers); //writeObject sérialise l'objet et l'écrit dans le fichier
+        try (FileOutputStream fileOut = new FileOutputStream(FILE_NAME); // ouvre un flux de sortie vers le fichier
+                                                                         // nommé 'FILE_NAME'
+                ObjectOutputStream out = new ObjectOutputStream(fileOut)) { // créer un flux de sortie d'objets qui
+                                                                            // permet de serialiser des objets java
+            out.writeObject(customers); // writeObject sérialise l'objet et l'écrit dans le fichier
             System.out.println("Les objets Customer ont été sérialisés et sauvegardés dans " + FILE_NAME);
         } catch (IOException i) {
             i.printStackTrace();
@@ -57,8 +60,8 @@ public class CustomerManager {
     @SuppressWarnings("unchecked")
     public static ArrayList<Customer> deserializeCustomers() {
         ArrayList<Customer> customers = null;
-        try (FileInputStream fileIn = new FileInputStream(FILE_NAME); //ouvre un flux d'entrée vers le fichier
-                ObjectInputStream in = new ObjectInputStream(fileIn)) { //créer un flux d'entrée
+        try (FileInputStream fileIn = new FileInputStream(FILE_NAME); // ouvre un flux d'entrée vers le fichier
+                ObjectInputStream in = new ObjectInputStream(fileIn)) { // créer un flux d'entrée
             customers = (ArrayList<Customer>) in.readObject(); // lit l'objet sérialisé et le convertit en arraylist
             System.out.println("Les objets Customer ont été désérialisés depuis " + FILE_NAME);
         } catch (IOException i) {

@@ -1,10 +1,13 @@
 package fr.afpa;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public abstract class Vehicle {
+public abstract class Vehicle implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+    
     // Attributs
     private String brand;
     private String model;

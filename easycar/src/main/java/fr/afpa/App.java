@@ -51,5 +51,7 @@ public class App
         for (Customer customer : customers) {
             System.out.println(customer + " - Total dépensé : \n" + customer.totalMoneySpent());
         }
+
+        CustomerManager.inputSerialize(customers);
     }
 }
